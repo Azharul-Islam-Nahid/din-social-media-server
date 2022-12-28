@@ -36,6 +36,13 @@ async function run() {
         })
 
 
+        app.get('/userpost', async (req, res) => {
+            const query = {}
+            const posts = await postsCollection.find(query).toArray();
+            res.send(posts)
+        })
+
+
         app.get('/user', async (req, res) => {
             const email = req.query.email;
             const query = { email: email };

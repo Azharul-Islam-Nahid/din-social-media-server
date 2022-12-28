@@ -18,12 +18,20 @@ async function run() {
 
     try {
         const usersCollection = client.db('dinSocialMedia').collection('users');
+        const postsCollection = client.db('dinSocialMedia').collection('posts');
 
 
 
         app.post('/users', async (req, res) => {
             const user = req.body;
             const result = await usersCollection.insertOne(user);
+            res.send(result);
+        })
+
+
+        app.post('/userpost', async (req, res) => {
+            const user = req.body;
+            const result = await postsCollection.insertOne(user);
             res.send(result);
         })
 

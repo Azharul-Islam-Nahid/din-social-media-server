@@ -50,6 +50,12 @@ async function run() {
         })
 
 
+        app.get('/sortedposts', async (req, res) => {
+            const posts = await postsCollection.find({}).sort({ likes: -1 }).limit(3).toArray();
+            res.send(posts)
+        })
+
+
         app.get('/user', async (req, res) => {
             const email = req.query.email;
             const query = { email: email };

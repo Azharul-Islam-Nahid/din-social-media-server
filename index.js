@@ -57,6 +57,29 @@ async function run() {
             res.send(userInfo);
         })
 
+        app.patch('/user', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+
+            const updatedName = req.body.name;
+            const updatedEmail = req.body.email;
+            const updatedUniversity = req.body.university;
+            const updatedAddress = req.body.address;
+            const updatedImage = req.body.image;
+
+            const updateDoc = {
+                $set: {
+                    name: updatedName,
+                    email: updatedEmail,
+                    university: updatedUniversity,
+                    address: updatedAddress,
+                    image: updatedImage
+                },
+            };
+            const result = await usersCollection.updateOne(query, updateDoc);
+            res.send(result);
+        })
+
 
     }
 
